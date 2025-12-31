@@ -6,10 +6,10 @@ import java.util.*;
 @Component
 public class AiAlgorithms {
 
-    private int searchDepth = 4;
+    private int searchDepth = 6;
 
     public void setDepth(int depth) {
-        this.searchDepth = Math.max(1, Math.min(depth, 10));
+        this.searchDepth = Math.max(1, Math.min(depth, 6));
     }
 
     public int getDepth() {
@@ -119,7 +119,7 @@ public class AiAlgorithms {
         while (!queue.isEmpty()) {
             SearchNode node = queue.poll();
 
-            if (node.depth >= 2) {
+            if (node.depth >= searchDepth) {
                 double score = evaluateBoard(node.board);
                 moveScores.merge(node.firstMove, score, Math::max);
                 continue;
@@ -150,7 +150,7 @@ public class AiAlgorithms {
             GameLogic.BoardMoveResult result = applyMove(board, move);
             if (!result.moved()) continue;
 
-            double score = dfs(result.board(), 3);
+            double score = dfs(result.board(), searchDepth - 1);
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = move;

@@ -99,11 +99,23 @@ public class GameController {
             @RequestParam String algorithm) {
         try {
             gameService.markAiStarted(sessionId, boardId);
+
+            // 1. Lấy nước đi AI tính toán
             String bestMove = gameService.getAiMove(sessionId, boardId, algorithm);
+
             if (bestMove != null) {
+                // 2. Thực hiện di chuyển
                 gameService.move(sessionId, bestMove, boardId);
             }
-            return ResponseEntity.ok(gameService.getGameState(sessionId, boardId));
+
+            // 3. Lấy trạng thái hiện tại
+            GameStateDTO state = gameService.getGameState(sessionId, boardId);
+
+            // 4. SỬA TẠI ĐÂY: Dùng setSuggestedMove thay vì setGameMode
+            // Gán nước đi vừa thực hiện vào để FE hiển thị hiệu ứng xanh
+            state.setSuggestedMove(bestMove);
+
+            return ResponseEntity.ok(state);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(401).build();
         }

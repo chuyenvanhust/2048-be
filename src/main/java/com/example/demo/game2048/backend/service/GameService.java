@@ -145,12 +145,13 @@ public class GameService {
         BoardState state = getBoard(sessionId, boardId);
         sessionService.touchSession(sessionId);
 
+        // Truyền state.lastSuggestedMove vào trường suggestedMove của DTO
         return new GameStateDTO(
                 state.board,
                 state.score,
                 state.gameOver,
-                state.lastSuggestedMove,
-                state.lastSuggester
+                state.lastSuggestedMove, // Biến này sẽ map vào suggestedMove ở DTO
+                state.currentUsername
         );
     }
 

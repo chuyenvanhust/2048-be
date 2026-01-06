@@ -23,7 +23,7 @@ public class AiAlgorithms {
             case "EXPECTIMAX" -> expectimaxMove(board);
             case "GREEDY" -> greedyMove(board);
             case "BFS" -> bfsMove(board);
-            case "DFS" -> dfsMove(board);
+            case "DLS" -> dlsMove(board);
             case "IDS" -> idsMove(board);
             case "MINIMAX" -> minimaxMove(board);
             default -> expectimaxMove(board);
@@ -139,9 +139,9 @@ public class AiAlgorithms {
                 .orElse("UP");
     }
 
-    /* ================= DFS ================= */
+    /* ================= DLS ================= */
 
-    private String dfsMove(int[][] board) {
+    private String dlsMove(int[][] board) {
         String[] moves = {"UP", "DOWN", "LEFT", "RIGHT"};
         String bestMove = "UP";
         double bestScore = Double.NEGATIVE_INFINITY;
@@ -150,7 +150,7 @@ public class AiAlgorithms {
             GameLogic.BoardMoveResult result = applyMove(board, move);
             if (!result.moved()) continue;
 
-            double score = dfs(result.board(), searchDepth - 1);
+            double score = dls(result.board(), searchDepth - 1);
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = move;
@@ -159,7 +159,7 @@ public class AiAlgorithms {
         return bestMove;
     }
 
-    private double dfs(int[][] board, int depth) {
+    private double dls(int[][] board, int depth) {
         if (depth == 0 || GameLogic.isGameOver(board)) {
             return evaluateBoard(board);
         }
@@ -168,7 +168,7 @@ public class AiAlgorithms {
         for (String move : new String[]{"UP", "DOWN", "LEFT", "RIGHT"}) {
             GameLogic.BoardMoveResult result = applyMove(board, move);
             if (result.moved()) {
-                maxScore = Math.max(maxScore, dfs(result.board(), depth - 1));
+                maxScore = Math.max(maxScore, dls(result.board(), depth - 1));
             }
         }
         return maxScore == Double.NEGATIVE_INFINITY ? evaluateBoard(board) : maxScore;
@@ -180,7 +180,7 @@ public class AiAlgorithms {
         String bestMove = "UP";
 
         for (int depth = 1; depth <= searchDepth; depth++) {
-            String move = dfsLimitedMove(board, depth);
+            String move = dlsMove(board, depth);
             if (move != null) {
                 bestMove = move;
             }
@@ -188,7 +188,7 @@ public class AiAlgorithms {
         return bestMove;
     }
 
-    private String dfsLimitedMove(int[][] board, int maxDepth) {
+    private String dlsMove(int[][] board, int maxDepth) {
         String[] moves = {"UP", "DOWN", "LEFT", "RIGHT"};
         String bestMove = null;
         double bestScore = Double.NEGATIVE_INFINITY;
@@ -197,7 +197,7 @@ public class AiAlgorithms {
             GameLogic.BoardMoveResult result = applyMove(board, move);
             if (!result.moved()) continue;
 
-            double score = dfs(result.board(), maxDepth - 1);
+            double score = dls(result.board(), maxDepth - 1);
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = move;

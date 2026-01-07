@@ -9,11 +9,11 @@ import java.util.stream.Collectors;
 public class GameLogic {
     public static final int BOARD_SIZE = 4;
 
-    // Records để trả về nhiều giá trị từ một phương thức, giống như tuple trong Python
+   
     public record MoveResult(int[] line, int score, boolean moved) {}
     public record BoardMoveResult(int[][] board, int score, boolean moved) {}
 
-    // Dịch lại hàm compress_line từ Python
+    
     public static MoveResult compressLine(int[] line) {
         List<Integer> nonZero = Arrays.stream(line).filter(i -> i != 0).boxed().collect(Collectors.toList());
         List<Integer> outList = new ArrayList<>();

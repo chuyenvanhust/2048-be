@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<!-- Tôi đã chọn một phiên bản ổn định gần đây, bạn có thể thay đổi nếu muốn -->
+		
 		<version>3.5.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<!-- Thay đổi thông tin này để mô tả đúng dự án backend -->
+
 	<groupId>com.example.demo</groupId>
 	<artifactId>game2048-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -18,13 +18,12 @@
 	<description>Backend project for 2048 Game</description>
 
 	<properties>
-		<!-- Giữ nguyên phiên bản Java 21 của bạn -->
+		
 		<java.version>21</java.version>
 	</properties>
 
 	<dependencies>
-		<!-- THÊM MỚI: Cần thiết để xây dựng ứng dụng web, API REST -->
-		<!-- Bao gồm Tomcat, Spring MVC, và mọi thứ cần thiết cho @RestController -->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -34,8 +33,7 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-		<!-- THÊM MỚI: Giúp giảm code boilerplate (getter, setter, constructor...) -->
-		<!-- Rất cần thiết vì chúng ta đã dùng @Data trong các file DTO -->
+		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -43,7 +41,7 @@
 		</dependency>
 
 
-		<!-- Giữ nguyên: Cần thiết để chạy các bài test -->
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -70,7 +68,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<!-- Thêm cấu hình này để Lombok hoạt động đúng -->
+				
 				<configuration>
 					<excludes>
 						<exclude>

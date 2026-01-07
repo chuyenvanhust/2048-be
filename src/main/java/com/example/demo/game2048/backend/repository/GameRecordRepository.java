@@ -44,8 +44,7 @@ public interface GameRecordRepository extends JpaRepository<GameRecord, Long> {
             "FROM game_records GROUP BY username ORDER BY MAX(max_tile) DESC, MAX(score) DESC LIMIT 10", nativeQuery = true)
     List<Map<String, Object>> getTopPlayers();
 
-    // NEW: Find by category (MANUAL, EXPECTIMAX, GREEDY, BFS, DFS, IDS, MINIMAX)
-    // This will match both SINGLE_<algo> and BATCH_<algo>
+    
     @Query(value = "SELECT * FROM game_records WHERE " +
             "CASE " +
             "  WHEN :category = 'MANUAL' THEN game_mode = 'SINGLE_MANUAL' " +
@@ -53,7 +52,7 @@ public interface GameRecordRepository extends JpaRepository<GameRecord, Long> {
             "END", nativeQuery = true)
     List<GameRecord> findByCategory(@Param("category") String category);
 
-    // NEW: Get all unique categories
+ 
     @Query(value = "SELECT DISTINCT " +
             "CASE " +
             "  WHEN game_mode = 'SINGLE_MANUAL' THEN 'MANUAL' " +

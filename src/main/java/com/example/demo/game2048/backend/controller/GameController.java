@@ -111,8 +111,7 @@ public class GameController {
             // 3. Lấy trạng thái hiện tại
             GameStateDTO state = gameService.getGameState(sessionId, boardId);
 
-            // 4. SỬA TẠI ĐÂY: Dùng setSuggestedMove thay vì setGameMode
-            // Gán nước đi vừa thực hiện vào để FE hiển thị hiệu ứng xanh
+          
             state.setSuggestedMove(bestMove);
 
             return ResponseEntity.ok(state);

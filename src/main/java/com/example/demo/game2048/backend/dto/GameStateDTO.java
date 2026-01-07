@@ -7,7 +7,7 @@ public class GameStateDTO {
     private int[][] board;
     private int score;
     private boolean gameOver;
-    private String suggestedMove; // Đổi từ gameMode thành suggestedMove
+    private String suggestedMove;
     private String username;
 
     public GameStateDTO(int[][] board, int score, boolean gameOver, String suggestedMove, String username) {

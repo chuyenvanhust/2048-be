@@ -17,7 +17,7 @@ public class SessionCleanupScheduler {
     /**
      * Run every 10 minutes to clean up expired sessions
      */
-    @Scheduled(fixedRate = 600000) // 10 minutes in milliseconds
+    @Scheduled(fixedRate = 600000)
     public void cleanupExpiredSessions() {
         int cleanedCount = sessionService.cleanupExpiredSessions();
 
@@ -30,7 +30,7 @@ public class SessionCleanupScheduler {
     /**
      * Log session statistics every hour
      */
-    @Scheduled(fixedRate = 3600000) // 1 hour in milliseconds
+    @Scheduled(fixedRate = 3600000)
     public void logSessionStats() {
         var stats = sessionService.getSessionStats();
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

@@ -1,4 +1,4 @@
-package com.example.demo.game2048.backend.config; // CHÚ Ý: Sửa lại cho đúng package của bạn
+package com.example.demo.game2048.backend.config; 
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,16 +39,16 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // QUAN TRỌNG: Thêm cả link localhost và link Render của bạn vào đây
+      
         config.setAllowedOrigins(List.of(
-                "http://localhost:5173",           // Cho phép khi bạn chạy ở máy cá nhân
-                "https://two048-fe-1.onrender.com" // Cho phép link Frontend trên Render
+                "http://localhost:5173",          
+                "https://two048-fe-1.onrender.com" 
         ));
 
-        // Cho phép các phương thức HTTP
+        
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
-        // QUAN TRỌNG: Phải liệt kê Header "X-Session-Id" để Spring không chặn nó
+      
         config.setAllowedHeaders(List.of(
                 "Origin",
                 "Content-Type",
@@ -58,10 +58,9 @@ public class SecurityConfig {
                 "X-Requested-With"
         ));
 
-        // Cho phép gửi kèm Cookie hoặc thông tin xác thực nếu cần
+        
         config.setAllowCredentials(true);
 
-        // Áp dụng cấu hình trên cho tất cả các đường dẫn API
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
 
